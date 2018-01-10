@@ -1,13 +1,20 @@
 import React, { Component } from "react";
-import logo from "../logo.svg";
-import { Navbar } from "react-bootstrap";
+import { Navbar, Nav, NavItem } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 class Navigation extends Component {
   render() {
     return (
       <div>
         <Navbar>
-          <img src={logo} className="App-logo" alt="logo" />
+          <Nav>
+            <LinkContainer exact to="/">
+              <NavItem>Home</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/about">
+              <NavItem>About</NavItem>
+            </LinkContainer>
+          </Nav>
         </Navbar>
       </div>
     );

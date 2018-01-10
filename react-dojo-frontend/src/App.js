@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Jumbotron } from "react-bootstrap";
 import Navigation from "./components/Navigation";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Home from "./components/Home";
+import About from "./components/About";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Navigation />
-        <Jumbotron>
-          <h1 className="App-title">Welcome to React</h1>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </Jumbotron>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Navigation />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
