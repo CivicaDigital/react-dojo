@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Panel, Image } from "react-bootstrap";
+import {
+  Panel,
+  Image,
+  Button,
+  FormGroup,
+  ControlLabel,
+  Radio
+} from "react-bootstrap";
 
 class UserDetails extends Component {
   constructor() {
@@ -12,11 +19,19 @@ class UserDetails extends Component {
           last: ""
         },
         thumbnail: ""
+      },
+      search: {
+        gender: "male"
       }
     };
   }
+
   componentDidMount() {
-    fetch("https://randomuser.me/api/?results=1")
+    this.fetchRandomUser({ gender: this.state.search.gender });
+  }
+
+  fetchRandomUser(searchOptions) {
+    fetch("https://randomuser.me/api/?results=1&gender=" + searchOptions.gender)
       .then(apiResults => {
         return apiResults.json();
       })
@@ -57,8 +72,49 @@ class UserDetails extends Component {
     return { fontSize: "30px" };
   };
 
+  handleGenderChange = changeEvent => {
+    this.setState({ search: { gender: changeEvent.target.value } });
+  };
+
   getPanelFooter = () => {
-    return <div>&nbsp;</div>;
+    return (
+      <form style={{ fontSize: "0.6em" }}>
+        <Button
+          id="btnNewRandomUser"
+          bsStyle="success"
+          onClick={() => {
+            this.fetchRandomUser({ gender: this.state.search.gender });
+          }}
+        >
+          New random user
+        </Button>
+        <br />
+        <br />
+        <FormGroup controlId="">
+          <ControlLabel>Gender:</ControlLabel>{" "}
+          <Radio
+            id="rdiMale"
+            name="gender"
+            value="male"
+            inline
+            onChange={this.handleGenderChange}
+            checked={this.state.search.gender === "male"}
+          >
+            Male
+          </Radio>
+          <Radio
+            id="rdiFemale"
+            name="gender"
+            value="female"
+            inline
+            onChange={this.handleGenderChange}
+            checked={this.state.search.gender === "female"}
+          >
+            Female
+          </Radio>
+        </FormGroup>
+      </form>
+    );
   };
   render() {
     let usersFullname = this.getUsersFullname(this.state.user);
