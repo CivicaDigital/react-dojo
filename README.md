@@ -75,8 +75,8 @@ Now let's see if it's working by editing `App.js`:
 
 * Add `import { Navbar, Jumbotron } from "react-bootstrap";` to the list of imports
 * Replace `header` with `Navbar` and remove the `className` attribute (remember the end tag)
-* Replace `p` with `Jumbotron` and remove the `className` attribute
-* Move the `h1` from between `Navbar` to between `Jumbotron`
+* Replace `p` with `Jumbotron` and move it outside the `Navbar` tags
+* Move the `a` from between `Navbar` to between `Jumbotron`
 
 If you've left the site running, you should see all of your changes show up in real time as you save.
 
